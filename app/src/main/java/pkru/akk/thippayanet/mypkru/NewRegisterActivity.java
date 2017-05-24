@@ -49,14 +49,26 @@ public class NewRegisterActivity extends AppCompatActivity implements View.OnCli
                 Log.d("24MayV1", "e humanUri ==> " + e.toString());
             }
         }//if human
-        //ForCamera
-        if ((requestCode == 1) &&(resultCode == RESULT_OK)) {
+        // for Camera
+        if ((requestCode == 1)&&(resultCode == RESULT_OK)) {
+
             Log.d("24MayV1", "Camera Result OK");
 
-        }// If Camera
+            //Show Image
+            camaraUri = data.getData();
+            try {
 
-    }
+                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver()
+                        .openInputStream(camaraUri));
+                humanImageView.setImageBitmap(bitmap);
 
+            } catch (Exception e) {
+                Log.d("24MayV1", " e camera ==> " + e.toString());
+            }
+
+        }  // if Camera
+
+    }   // onActivity
     private void controller() {
         backImageView.setOnClickListener(this);
         humanImageView.setOnClickListener(this);
